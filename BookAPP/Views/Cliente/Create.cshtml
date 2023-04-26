@@ -1,5 +1,135 @@
-﻿@{
+﻿@model BookAPP.Models.clienteModel
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cliente Nuevo</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+            table th {
+                background-color: #B8DBFD;
+                color: #333;
+                font-weight: bold;
+            }
+
+            table th, table td {
+                padding: 5px;
+                border: 1px solid #ccc;
+            }
+
+            table, table table td {
+                border: 0px solid #ccc;
+            }
+
+        input[type=text], select {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Ingresar un Cliente Nuevo</h2>
+
+    @using (Html.BeginForm("Create", "Cliente"))
+    {
+        if (ViewBag.Estado != null && ViewBag.Estado == 0)
+        {
+            <script type="text/javascript">
+
+                window.onload = function () {
+                    alert("Ingrese todos los datos");
+                };
+            </script>
+
+        }
+
+        if (ViewBag.Estado != null && ViewBag.Estado == 1)
+        {
+            <script type="text/javascript">
+
+                window.onload = function () {
+                    alert("Cliente Ingresado correctamente");
+                    const response = confirm("Desea agregar más clientes");
+
+                    if (!response) {
+                        window.open('/Home/Index', '_self', false)
+                    }
+                };
+            </script>
+
+
+        }
+
+        <table class="table">
+            <tr>
+                <th colspan="2" align="center">Datos del Cliente</th>
+            </tr>
+
+            <tr>
+                <td>Nombre completo: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.nombre, new { id = "txtnombre", type = "string", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.nombre, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td>Cédula: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.id, new { id = "txtcedula", type = "string", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.id, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td>Fecha de Nacimiento: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.fnacimiento, "{0:yyyy-MM-dd}", new { id = "txtDOB", type = "date", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.fnacimiento, "", new { @class = "text-danger" })
+
+
+                </td>
+            </tr>
+            <tr>
+                <td>Correo Electrónico: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.correo, new { id = "txtcorreo", type = "email", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.correo, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
+
+       
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Ingresar Usuario" />
+            </div>
+        </div>
+    
+
+    }
+    <p></p>
+    <div>
+        @Html.ActionLink("Regresar", "Index", "Home")
+    </div>
+</body>
+
+</html>
+
+
+
+
 
 

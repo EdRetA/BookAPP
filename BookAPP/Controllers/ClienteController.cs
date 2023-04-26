@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BookAPP.Models;
 
 namespace BookAPP.Controllers
 {
@@ -28,19 +29,32 @@ namespace BookAPP.Controllers
 
         // POST: Cliente/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(clienteModel clienteD)
         {
             try
             {
                 // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    clienteDal entdb = new clienteDal();
+                    string resp = entdb.AgregarCliente(clienteD);
+                    ViewBag.Estado = 1;
+                    ModelState.Clear();
+                    return View("Create");
+                }
+                else
+                {                    
+                    ViewBag.Estado = 2;                    
+                    return View("Create");
+                }
+                    
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
         }
+
 
         // GET: Cliente/Edit/5
         public ActionResult Edit(int id)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace BookAPP.Models
@@ -9,32 +10,31 @@ namespace BookAPP.Models
 
         SqlConnection con = new SqlConnection(conectionString);
 
-        //public string AgregarLibro(libroModel libroObj)
-        //{
-        //    try
-        //    {
-        //        SqlCommand cmd = new SqlCommand("sp_insEntrada", con);
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.Parameters.AddWithValue("@producto", entrada.productoN);
-        //        cmd.Parameters.AddWithValue("@lote", entrada.lote);
-        //        cmd.Parameters.AddWithValue("@ffabricacion", entrada.ffabricacion);
-        //        cmd.Parameters.AddWithValue("@fvencimiento", entrada.fvencimiento);
-        //        cmd.Parameters.AddWithValue("@fingreso", entrada.fingreso);
-        //        cmd.Parameters.AddWithValue("@cantidad", entrada.cantidad);
-        //        cmd.Parameters.AddWithValue("@proveedor", entrada.proveedor);
-        //        con.Open();
-        //        cmd.ExecuteNonQuery();
-        //        con.Close();
-        //        return ("Entrada de producto agregada satisfactoriamente");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        if (con.State == ConnectionState.Open)
-        //        {
-        //            con.Close();
-        //        }
-        //        return (ex.Message.ToString());
-        //    }
-        //}
+        public string AgregarLibro(libroModel libroObj)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("libroinsertupdatedelete", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@codigo", libroObj.codigo);
+                cmd.Parameters.AddWithValue("@nombre", libroObj.nombre);
+                cmd.Parameters.AddWithValue("@empresa", libroObj.empresa);
+                cmd.Parameters.AddWithValue("@precio", libroObj.precio);
+                cmd.Parameters.AddWithValue("@stock", libroObj.cantidad);
+                cmd.Parameters.AddWithValue("@accion", "Insert");
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return ("Libro agregado satisfactoriamente");
+            }
+            catch (Exception ex)
+            {
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+                return (ex.Message.ToString());
+            }
+        }
     }
 }

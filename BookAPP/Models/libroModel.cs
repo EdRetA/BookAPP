@@ -13,5 +13,9 @@ namespace BookAPP.Models
         public string nombre { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Este campo es requerido")]
         public string empresa { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Este campo es requerido")]
+        public int precio { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Este campo es requerido")]
+        public int cantidad { get; set; }
     }
 }
