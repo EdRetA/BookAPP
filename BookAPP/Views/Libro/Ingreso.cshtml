@@ -1,5 +1,165 @@
-﻿@{
+﻿@model BookAPP.Models.libroModel
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Nuevo Entrega</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+            table th {
+                background-color: #B8DBFD;
+                color: #333;
+                font-weight: bold;
+            }
+
+            table th, table td {
+                padding: 5px;
+                border: 1px solid #ccc;
+            }
+
+            table, table table td {
+                border: 0px solid #ccc;
+            }
+
+        input[type=text], select {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Ingresar Entrega Nuevo</h2>
+
+    @using (Html.BeginForm("Ingreso", "Libro"))
+    {
+        if (ViewBag.Estado != null && ViewBag.Estado == 0)
+        {
+            <script type="text/javascript">
+
+                window.onload = function () {
+                    alert("Ingrese todos los datos");
+                };
+            </script>
+
+        }
+
+        if (ViewBag.Estado != null && ViewBag.Estado == 1)
+        {
+            <script type="text/javascript">
+
+                window.onload = function () {
+                    alert("Libro Ingresado correctamente");
+                    const response = confirm("Desea agregar más libros");
+
+                    if (!response) {
+                        window.open('/Home/Index', '_self', false)
+                    }
+                };
+            </script>
+
+
+        }
+
+        <div id="controles">
+            <table class="table">
+                <tr>
+                    <th colspan="2" align="center">Datos del Libro</th>
+                </tr>
+
+
+                <tr>
+                    <td>Código: </td>
+                    <td>
+
+                        @*, @hidden = "enable"*@
+
+                        @Html.TextBoxFor(m => m.codigo, new { id = "txtcodigo", type = "string", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.codigo, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>Título: </td>
+                    <td>
+
+                        @*, @hidden = "enable"*@
+
+                        @Html.TextBoxFor(m => m.nombre, new { id = "txtnombre", type = "string", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.nombre, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cantidad Actual: </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.stock, new { id = "txtStock", type = "string", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.stock, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>Reservados: </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.reservas, new { id = "txtreservas", type = "string", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.reservas, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2" align="center">Datos de Nuevo Ingreso</th>
+                </tr>
+                <tr>
+                    <td>Cantidad Libros: </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.recarga, new { id = "txtrecarga", type = "string", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.recarga, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>Empresa: </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.empresa, new { id = "txtempresa", type = "string", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.empresa, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>Precio: </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.precio, new { id = "txtprecio", type = "string", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.precio, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+            </table>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Ingresar Entrega" />
+                </div>
+            </div>
+        </div>
+
+    }
+    <p></p>
+    <div>
+        @Html.ActionLink("Regresar", "Index", "Libroes")
+    </div>
+</body>
+
+</html>
+
+
+
+
 
 

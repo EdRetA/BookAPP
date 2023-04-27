@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BookAPP.Models;
 
 namespace BookAPP.Controllers
 {
@@ -23,28 +24,39 @@ namespace BookAPP.Controllers
         // GET: Apartado/Create
         public ActionResult Create()
         {
+            PopulateDropDownList();
             return View();
         }
 
         // POST: Apartado/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(apartadoModel apartadoD)
         {
             try
             {
-                // TODO: Add insert logic here
+                apartadoD.fklibro = apartadoD.id;
+                apartadoD.estado = false;
+                                    
+                    apartadoDal entdb = new apartadoDal();
+                    string resp = entdb.AgregarApartado(apartadoD);
+                    
+                    ModelState.Clear();
+                ViewBag.Estado = 1;
+                //PopulateDropDownList();
+                return RedirectToAction("Index","Libroes");
+                //return View("Create");
 
-                return RedirectToAction("Index");
+
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
         }
 
         // GET: Apartado/Edit/5
-        public ActionResult Edit(int id)
-        {
+        public ActionResult Edit(int id)        {
+            
             return View();
         }
 
@@ -84,6 +96,13 @@ namespace BookAPP.Controllers
             {
                 return View();
             }
+        }
+
+        private void PopulateDropDownList()
+        {
+            apartadoDal entdb = new apartadoDal();
+            List<string> items = entdb.BuscarClientes();
+            ViewBag.Items = items;
         }
     }
 }

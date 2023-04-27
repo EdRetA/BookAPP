@@ -1,5 +1,104 @@
-﻿@{
+﻿@model BookAPP.Models.apartadoModel
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Reserva de Libro</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+            table th {
+                background-color: #B8DBFD;
+                color: #333;
+                font-weight: bold;
+            }
+
+            table th, table td {
+                padding: 5px;
+                border: 1px solid #ccc;
+            }
+
+            table, table table td {
+                border: 0px solid #ccc;
+            }
+
+        input[type=text], select {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Reserva de Libro</h2>
+
+    @using (Html.BeginForm("Create", "Apartado"))
+    {
+        if (ViewBag.Estado != null && ViewBag.Estado == 0)
+        {
+            <script type="text/javascript">
+
+                window.onload = function () {
+                    alert("Ingrese todos los datos");
+                };
+            </script>
+
+        }
+
+        
+
+        if (ViewBag.Estado != null && ViewBag.Estado == 1)
+        {
+            <script type="text/javascript">
+
+                window.onload = function () {
+                    alert("Libro apartado  correctamente");
+                };
+            </script>
+
+        }
+
+<table class="table">
+    <tr>
+        <th colspan="2" align="center">Reserva de Libro</th>
+    </tr>
+
+    <tr>
+        <td>Usuario: </td>
+        <td>
+            @Html.DropDownListFor(m => m.nombre, new SelectList(ViewBag.Items))            
+        </td>
+    </tr>
+    
+
+
+</table>
+
+        <input type="submit" value="Apartar" />
+
+    }
+    <p></p>
+    <div>
+        @Html.ActionLink("Regresar", "Index", "Libroes")
+    </div>
+</body>
+
+</html>
+
+
+
+
 
 

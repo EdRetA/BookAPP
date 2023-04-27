@@ -135,12 +135,31 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\libroesController.cs" />
     <Compile Include="Models\apartadoDal.cs" />
     <Compile Include="Models\clienteDal.cs" />
     <Compile Include="Models\clienteModel.cs" />
+    <Compile Include="Models\libro.cs">
+      <DependentUpon>Libros.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\libroDal.cs" />
     <Compile Include="Models\libroModel.cs" />
     <Compile Include="Models\apartadoModel.cs" />
+    <Compile Include="Models\Libros.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Libros.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Libros.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Libros.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Libros.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Libros.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -152,8 +171,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\Libros.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Libros.edmx</DependentUpon>
+      <LastGenOutput>Libros.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Libros.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Libros.edmx</DependentUpon>
+      <LastGenOutput>Libros.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\Libros.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Libros.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Libros.edmx.diagram">
+      <DependentUpon>Libros.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -183,6 +219,12 @@
     <Content Include="Views\Cliente\Create.cshtml" />
     <Content Include="Views\Libro\Create.cshtml" />
     <Content Include="Views\Libro\Ingreso.cshtml" />
+    <Content Include="Views\libroes\Create.cshtml" />
+    <Content Include="Views\libroes\Delete.cshtml" />
+    <Content Include="Views\libroes\Details.cshtml" />
+    <Content Include="Views\libroes\Edit.cshtml" />
+    <Content Include="Views\libroes\Index.cshtml" />
+    <Content Include="Views\libroes\Reserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -20,7 +20,7 @@ namespace BookAPP.Models
                 cmd.Parameters.AddWithValue("@nombre", libroObj.nombre);
                 cmd.Parameters.AddWithValue("@empresa", libroObj.empresa);
                 cmd.Parameters.AddWithValue("@precio", libroObj.precio);
-                cmd.Parameters.AddWithValue("@stock", libroObj.cantidad);
+                cmd.Parameters.AddWithValue("@stock", 0);
                 cmd.Parameters.AddWithValue("@accion", "Insert");
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -35,6 +35,22 @@ namespace BookAPP.Models
                 }
                 return (ex.Message.ToString());
             }
+        }
+
+        public string ActualizarLibro(libroModel libroObj)
+        {
+            SqlCommand cmd = new SqlCommand("libroinsertupdatedelete", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@codigo", libroObj.codigo);
+            cmd.Parameters.AddWithValue("@nombre", libroObj.nombre);
+            cmd.Parameters.AddWithValue("@empresa", libroObj.empresa);
+            cmd.Parameters.AddWithValue("@precio", libroObj.precio);
+            cmd.Parameters.AddWithValue("@stock", (libroObj.stock + libroObj.recarga));
+            cmd.Parameters.AddWithValue("@accion", "Update");
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            return ("Libro agregado satisfactoriamente");
         }
     }
 }

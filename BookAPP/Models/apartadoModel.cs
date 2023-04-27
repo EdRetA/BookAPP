@@ -7,11 +7,10 @@
     public class apartadoModel
     {
         public int id { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Este campo es requerido")]
         public int fklibro { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Este campo es requerido")]
         public int fkcliente { get; set; }
         public bool estado { get; set; }
+        public string nombre { get; set; }
         public Nullable<System.DateTime> fretiro { get; set; }
     }
 }

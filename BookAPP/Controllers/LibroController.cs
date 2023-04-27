@@ -21,6 +21,7 @@ namespace BookAPP.Controllers
             return View();
         }
 
+        
         // GET: Libro/Create
         public ActionResult Create()
         {
@@ -54,14 +55,16 @@ namespace BookAPP.Controllers
                 return View();
             }
         }
-        
-        // GET: Libro/Create
-        public ActionResult Ingreso()
+
+        public ActionResult ingreso()
+
         {
-            return View();
+            CargarLibro();
+            return View(ViewBag.Items[0]);
+
         }
 
-        // POST: Libro/Create
+        // POST: Libro/Ingreso
         [HttpPost]
         public ActionResult Ingreso(libroModel libroD)
         {
@@ -70,11 +73,13 @@ namespace BookAPP.Controllers
                 // TODO: Add insert logic here
                 if (ModelState.IsValid)
                 {
+                    //string producto = Request.QueryString["0"];
                     libroDal entdb = new libroDal();
-                    string resp = entdb.AgregarLibro(libroD);
+                    string resp = entdb.ActualizarLibro(libroD);
                     ViewBag.Estado = 1;
                     ModelState.Clear();
-                    return View("Ingreso");
+                    
+                    return RedirectToAction("Index", "libroes");
                 }
                 else
                 {
@@ -88,6 +93,34 @@ namespace BookAPP.Controllers
                 return View();
             }
         }
+
+        private void CargarLibro()
+        {
+            libroModel  libroD = new libroModel();
+            string codigo = Request.QueryString["codigo"];
+            string nombre = Request.QueryString["nombre"];
+            string empresa = Request.QueryString["empresa"];
+            string precio = Request.QueryString["precio"];
+            string stock = Request.QueryString["stock"];
+            string reservas = Request.QueryString["reservas"];
+            libroD.codigo = Convert.ToInt32(codigo);
+            libroD.nombre = nombre;
+            libroD.empresa = empresa;
+            libroD.precio = Convert.ToInt32(precio);
+            libroD.stock = Convert.ToInt32(stock);
+            libroD.reservas = Convert.ToInt32(reservas);
+
+            List<libroModel> items = new List<libroModel>();
+            items.Add(libroD);
+            ViewBag.Items = items;
+        }
+
+
+
+
+
+
+
 
         // GET: Libro/Edit/5
         public ActionResult Edit(int id)
