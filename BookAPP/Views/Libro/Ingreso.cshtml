@@ -112,7 +112,8 @@
                     <td>Reservados: </td>
                     <td>
                         @Html.TextBoxFor(m => m.reservas, new { id = "txtreservas", type = "string", @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.reservas, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.reservas, "", new { @class = "text-danger" })                        
+                        @Html.DropDownListFor(m => m.nombre, new SelectList(ViewBag.reservas))
                     </td>
                 </tr>
                 <tr>
@@ -157,6 +158,8 @@
 </body>
 
 </html>
+
+
 
 
 

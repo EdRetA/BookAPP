@@ -18,6 +18,9 @@ namespace BookAPP.Models
         public int stock { get; set; }
         public int recarga { get; set; }
         public int reservas { get; set; }
+        public Boolean prueba { get; set; }
+
+
     }
 }
 

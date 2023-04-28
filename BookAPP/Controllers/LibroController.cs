@@ -60,9 +60,27 @@ namespace BookAPP.Controllers
 
         {
             CargarLibro();
-            return View(ViewBag.Items[0]);
-
+            PopulateDropDownList();
+            return View(ViewBag.Items[0]);            
         }
+
+        private void PopulateDropDownList()
+        {
+            libroModel libroM = new libroModel();
+            libroM.codigo = Convert.ToInt32(Request.QueryString["codigo"]);
+            libroDal entdb = new libroDal();
+            List<string> items = entdb.ConsultarApartados(libroM);
+            ViewBag.Reservas = items;
+        }
+
+
+        private void CargarReservas()
+        {
+            throw new NotImplementedException();
+        }
+
+
+
 
         // POST: Libro/Ingreso
         [HttpPost]
@@ -73,13 +91,15 @@ namespace BookAPP.Controllers
                 // TODO: Add insert logic here
                 if (ModelState.IsValid)
                 {
-                    //string producto = Request.QueryString["0"];
-                    libroDal entdb = new libroDal();
-                    string resp = entdb.ActualizarLibro(libroD);
-                    ViewBag.Estado = 1;
-                    ModelState.Clear();
+                                       
+                        libroDal entdb = new libroDal();
+                        string resp = entdb.ActualizarLibro(libroD);
+                        ViewBag.Estado = 1;
+                        ModelState.Clear();
+                        return RedirectToAction("Index", "libroes");                  
                     
-                    return RedirectToAction("Index", "libroes");
+
+                   
                 }
                 else
                 {
@@ -113,6 +133,8 @@ namespace BookAPP.Controllers
             List<libroModel> items = new List<libroModel>();
             items.Add(libroD);
             ViewBag.Items = items;
+
+
         }
 
 
