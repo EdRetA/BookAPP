@@ -230,6 +230,7 @@
     <Content Include="Views\libroes\Reserva.cshtml" />
     <Content Include="Views\Apartado\Buscar.cshtml" />
     <Content Include="Views\Apartado\Actualizar.cshtml" />
+    <Content Include="Views\Cliente\ListaClientes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

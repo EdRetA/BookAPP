@@ -15,6 +15,18 @@ namespace BookAPP.Controllers
             return View();
         }
 
+        public ActionResult ListaClientes()
+        {
+            CargaClientes();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ListaClientes(clienteModel clienteD)
+        {
+            return View();
+        }
+
         // GET: Cliente/Details/5
         public ActionResult Details(int id)
         {
@@ -99,5 +111,13 @@ namespace BookAPP.Controllers
                 return View();
             }
         }
+
+        private void CargaClientes()
+        {
+            clienteDal entdb = new clienteDal();
+            List<clienteModel> items = entdb.CargarClientes();
+            ViewBag.inventario = items;
+        }
+
     }
 }
