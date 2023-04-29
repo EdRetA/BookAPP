@@ -1,0 +1,128 @@
+﻿@model BookAPP.Models.apartadoModel
+@{
+    ViewBag.Title = "Buscar Reservas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Buscar Reservas</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+            table th {
+                background-color: #B8DBFD;
+                color: #333;
+                font-weight: bold;
+            }
+
+            table th, table td {
+                padding: 5px;
+                border: 1px solid #ccc;
+            }
+
+            table, table table td {
+                border: 0px solid #ccc;
+            }
+
+        input[type=text], select {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Buscar Reservas</h2>
+
+    @using (Html.BeginForm("Buscar", "Apartado", FormMethod.Post))
+    {
+
+
+        <table class="table">
+            <tr>
+                <th colspan="2" align="center">Buscar por cliente</th>
+            </tr>
+            <tr>
+                <td>Código de Cliente: </td>
+                <td>
+
+                    @Html.TextBoxFor(m => m.fkcliente)
+                    @Html.ValidationMessageFor(m => m.fkcliente, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
+        <p></p>
+        <input type="submit" value="Buscar" />
+        <p></p>
+    }
+
+    @if (ViewBag.entradas != null)
+    {
+        <table class="table">
+            <tr>
+                
+                <th>
+                    @Html.Label("idapartado")
+                </th>
+                <th>
+                    @Html.Label("CodLibro")
+                </th>
+                <th>
+                    @Html.Label("titulo")
+                </th>
+                <th>
+                    @Html.Label("precio")
+                </th>
+                <th>
+                    @Html.Label("Modificar")
+                </th>
+
+            </tr>
+
+
+
+            @foreach (var item in ViewBag.entradas)
+            {
+                <tr>
+                    <td>
+                        @item.idapartado
+                    </td>
+                    <td>
+                        @item.CodLibro
+                    </td>
+                    <td>
+                        @item.titulo
+                    </td>
+                    <td>
+                        @item.precio
+                    </td>
+
+                    <td>
+                        <input type="submit" value="Retirar" onclick="location.href='@Url.Action("Actualizar", "Apartado",item)'" />
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+
+    <p></p>
+    <div>
+        @Html.ActionLink("Regresar", "Index", "Entrada")
+    </div>
+
+</body>
+
+</html>

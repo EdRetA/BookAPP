@@ -132,6 +132,7 @@
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibroController.cs" />
+    <Compile Include="Controllers\vlibrousuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -160,6 +161,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Libros.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\vlibrousuarioModel.cs" />
+    <Compile Include="Models\vlibrousuarioDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -225,9 +228,12 @@
     <Content Include="Views\libroes\Edit.cshtml" />
     <Content Include="Views\libroes\Index.cshtml" />
     <Content Include="Views\libroes\Reserva.cshtml" />
+    <Content Include="Views\Apartado\Buscar.cshtml" />
+    <Content Include="Views\Apartado\Actualizar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\vlibrousuario\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -104,5 +104,72 @@ namespace BookAPP.Controllers
             List<string> items = entdb.BuscarClientes();
             ViewBag.Items = items;
         }
+
+        public ActionResult Actualizar()
+        {
+            RetirarLibros();
+
+
+            //apartadoDal entdb = new apartadoDal();
+            //List<string> items = entdb.BuscarClientes();
+            //ViewBag.Items = items;
+            
+            return Redirect("Buscar");
+        }
+
+
+
+        [HttpPost]
+        public ActionResult Actualizar(apartadoModel entradaD)
+        {
+            apartadoDal entdb = new apartadoDal();
+            List<string> items = entdb.BuscarClientes();
+            ViewBag.Items = items;
+            return View();
+        }
+        public ActionResult buscar()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult buscar(apartadoModel entradaD)
+        {
+            apartadoDal entdb = new apartadoDal();
+            List<vlibrousuarioModel> items = entdb.BuscarEntrada(entradaD);
+            ViewBag.entradas = items;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult BuscarEntrada(vlibrousuarioModel entradaD)
+        {
+            vlibrousuarioDal entdb = new vlibrousuarioDal();
+            List<vlibrousuarioModel> items = entdb.BuscarEntrada(entradaD);
+            ViewBag.entradas = items;
+            return View();
+        }
+
+
+
+
+        private void RetirarLibros()
+        {
+            //libroModel libroD = new libroModel();
+            apartadoModel apartadoD = new apartadoModel();            
+            string codigo = Request.QueryString["idapartado"];            
+            apartadoD.id = Convert.ToInt32(codigo);
+
+            apartadoDal entdb = new apartadoDal();
+                        entdb.cambiarestado(apartadoD);           
+          
+
+        }
+
+
+
+
+
     }
 }
