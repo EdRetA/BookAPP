@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using BookAPP.Models;
 
+
+
 namespace BookAPP.Controllers
 {
     public class ApartadoController : Controller
@@ -23,6 +25,11 @@ namespace BookAPP.Controllers
 
         // GET: Apartado/Create
         public ActionResult Create()
+        {
+            PopulateDropDownList();
+            return View();
+        }
+        public ActionResult ReporteEntregas()
         {
             PopulateDropDownList();
             return View();
